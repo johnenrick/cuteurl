@@ -9,6 +9,8 @@
       "@api-model/*": ["src/app/api/models/*"],
       "@core/*": ["src/app/core/*"],
       "@core-api/*": ["src/app/core/api-controller/*"],
+      "@environments": ["src/environments/*"],
+      "@environment": ["src/environments/environment.ts"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

@@ -2,7 +2,23 @@
   <div class="card-body">
     <h1>CuteURL</h1>
     <p class="lead">Make those very long, chunky, and suspicious links of your into cute</p>
-    <input class="form-control form-control-lg mb-4" placeholder="http://<your-long-link-here>" />
-    <button (click)="cutify()" class="btn btn-lg btn-primary">Cutify This Link</button>
+    <div *ngIf="cutifiedLink === ''">
+      <input 
+        [(ngModel)]="url"  ngModel
+        class="form-control form-control-lg mb-4" 
+        placeholder="http://your-long-link-here" 
+        type="text" 
+      />
+      <button (click)="cutify()" [disabled]="isLoading" class="btn btn-lg btn-primary">Cutify This Link</button>
+    </div>
+    <div *ngIf="cutifiedLink !== ''">
+      <div  class="input-group mb-3">
+        <span class="form-control form-control-lg text-center">{{cutifiedLink}}</span>
+        <button class="btn btn-info btn-lg" type="button">Copy</button>
+      </div>
+      <div>
+        <a (click)="reset()" href="#">Cutify Another Link</a>
+      </div>
+    </div>
   </div>
 </div>
