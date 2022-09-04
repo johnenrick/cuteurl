@@ -18,5 +18,7 @@ export class CuteLinkTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  copyLink(link: string){
+    navigator.clipboard.writeText(link);
+  }
 }

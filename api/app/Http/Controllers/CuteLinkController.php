@@ -47,9 +47,9 @@ class CuteLinkController extends APIController
         $validator = Validator::make(['code' => $code], [
             'code' => 'alpha_num|size:8'
         ]);
-        $invalidLink = 'localhost:4200/invalid-link';
+        $invalidLink = env('INVALID_LINK');
         if ($validator->fails()) {
-            echo 'failed';
+            return redirect($invalidLink);
         }else{
             $cuteLinkId = substr($code, 2, $this->idLength);
             $randomCode = substr($code, 0, 2);
@@ -62,7 +62,7 @@ class CuteLinkController extends APIController
                 }
                 return redirect($cuteLink['url']);
             }else{
-                echo 'atotz'.$cuteLinkId.'==='.$randomCode;
+                return redirect($invalidLink);
             }
         }
     }
