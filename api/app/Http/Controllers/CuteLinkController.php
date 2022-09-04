@@ -11,7 +11,7 @@ class CuteLinkController extends APIController
     private $codeLength = 8; // the total length of the code. Random code + id
     public function generateCutifiedLink(Request $request){
         $validator = Validator::make($request->all(), [
-            'url' => 'required||min:10|max:255' // cannot use unique validation because url is varchar
+            'url' => 'required||min:3|max:255' // cannot use unique validation because url is varchar
         ]);
         if ($validator->fails()) {
             $this->setResponseErrors(1000, $validator->errors());
@@ -53,10 +53,16 @@ class CuteLinkController extends APIController
         }else{
             $cuteLinkId = substr($code, 2, $this->idLength);
             $randomCode = substr($code, 0, 2);
-            $cuteLink = (new \App\Models\CuteLink())->where('id', $cuteLinkId)->where('random_code', $randomCode)->get()->toArray();
+            $cuteLink = (new \App\Models\CuteLink())->where('id', base64TextToDecimal($cuteLinkId))->where('random_code', $randomCode)->get()->toArray();
             if(count($cuteLink)){
                 $cuteLink = $cuteLink[0];
+                $first4Characters = substr($cuteLink['url'], 0, 4);
+                if($first4Characters != 'http'){
+                    $cuteLink['url'] = 'http://' . $cuteLink['url'];
+                }
                 return redirect($cuteLink['url']);
+            }else{
+                echo 'atotz'.$cuteLinkId.'==='.$randomCode;
             }
         }
     }

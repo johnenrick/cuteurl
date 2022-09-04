@@ -1,0 +1,14 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-center">Your Ugly Link</th>
+      <th class="text-center">Cute Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cuteLink of cuteLinks">
+      <td>{{cuteLink['url']}}</td>
+      <td class="text-center">{{cuteLink['cutified_link']}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-
-
+import { StoreModule } from '@ngrx/store';
+import { cuteLinkReducer } from './system/store/reducers/cute-link.reducer';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    StoreModule.forRoot({
+      cuteLinks: cuteLinkReducer,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

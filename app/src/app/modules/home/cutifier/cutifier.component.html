@@ -9,7 +9,7 @@
         placeholder="http://your-long-link-here" 
         type="text" 
       />
-      <button (click)="cutify()" [disabled]="isLoading || url.length <= 10" class="btn btn-lg btn-primary">
+      <button (click)="cutify()" [disabled]="isLoading || url.length < 3" class="btn btn-lg btn-primary">
         {{isLoading ? 'Cutifying your link...' : 'Cutify This Link'}}
       </button>
     </div>
