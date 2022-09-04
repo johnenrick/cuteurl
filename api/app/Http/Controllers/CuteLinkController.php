@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CuteLinkController extends APIController
 {
+    private $idLength = 6; // the length of id in the code
+    private $codeLength = 8; // the total length of the code. Random code + id
     public function generateCutifiedLink(Request $request){
         $validator = Validator::make($request->all(), [
             'url' => 'required||min:10|max:255' // cannot use unique validation because url is varchar
@@ -41,9 +43,24 @@ class CuteLinkController extends APIController
         }
         return $this->outputResponse();
     }
-    private function getCutifiedLink($cuteLink){
-        return $cuteLink['random_code'] . str_pad(decimalToBase64Text($cuteLink['id']), 5, '0', STR_PAD_LEFT );
+    public function redirect(Request $request, $code){
+        $validator = Validator::make(['code' => $code], [
+            'code' => 'alpha_num|size:8'
+        ]);
+        $invalidLink = 'localhost:4200/invalid-link';
+        if ($validator->fails()) {
+            echo 'failed';
+        }else{
+            $cuteLinkId = substr($code, 2, $this->idLength);
+            $randomCode = substr($code, 0, 2);
+            $cuteLink = (new \App\Models\CuteLink())->where('id', $cuteLinkId)->where('random_code', $randomCode)->get()->toArray();
+            if(count($cuteLink)){
+                $cuteLink = $cuteLink[0];
+                return redirect($cuteLink['url']);
+            }
+        }
     }
-
-    
+    private function getCutifiedLink($cuteLink){
+        return url($cuteLink['random_code'] . str_pad(decimalToBase64Text($cuteLink['id']), $this->idLength, '0', STR_PAD_LEFT ));
+    }
 }
