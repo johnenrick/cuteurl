@@ -3,6 +3,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@store/*": ["src/app/system/store/*"],
+      "@api/*": ["src/app/api/services/*"],
+      "@api-model/*": ["src/app/api/models/*"],
+      "@core/*": ["src/app/core/*"],
+      "@core-api/*": ["src/app/core/api-controller/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
