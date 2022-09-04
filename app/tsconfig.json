@@ -10,7 +10,8 @@
       "@core/*": ["src/app/core/*"],
       "@core-api/*": ["src/app/core/api-controller/*"],
       "@environments": ["src/environments/*"],
-      "@environment": ["src/environments/environment.ts"]
+      "@environment": ["src/environments/environment.ts"],
+      "@assets": ["src/assets/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

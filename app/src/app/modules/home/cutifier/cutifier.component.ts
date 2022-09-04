@@ -17,9 +17,16 @@ export class CutifierComponent implements OnInit {
   }
   cutify(){
     this.isLoading = true;
-    this.cuteLinkAPIService.generateCutifiedLink(this.url).subscribe((value:APIResponse<CuteLink>) => {
+    this.cuteLinkAPIService.generateCutifiedLink(this.url).subscribe((response:APIResponse<CuteLink>) => {
+      console.log('value', response);
+      if(!response['error']['code']){
+        this.cutifiedLink = response['result']['cutified_link'];
+      }
       this.isLoading = false;
     })
+  }
+  copyLink(){
+    navigator.clipboard.writeText(this.cutifiedLink);
   }
   reset(){
     this.cutifiedLink = '';

@@ -1,6 +1,6 @@
-<div class="cutifierContainer card text-center mx-auto shadow">
-  <div class="card-body">
-    <h1>CuteURL</h1>
+<div class="cutifierContainer  text-center">
+    <img [src]="'../../../../assets/img/shinchan.png'" />
+    <h1 class="display-1 fw-bold">CuteURL</h1>
     <p class="lead">Make those very long, chunky, and suspicious links of your into cute</p>
     <div *ngIf="cutifiedLink === ''">
       <input 
@@ -9,16 +9,17 @@
         placeholder="http://your-long-link-here" 
         type="text" 
       />
-      <button (click)="cutify()" [disabled]="isLoading" class="btn btn-lg btn-primary">Cutify This Link</button>
+      <button (click)="cutify()" [disabled]="isLoading || url.length <= 10" class="btn btn-lg btn-primary">
+        {{isLoading ? 'Cutifying your link...' : 'Cutify This Link'}}
+      </button>
     </div>
     <div *ngIf="cutifiedLink !== ''">
       <div  class="input-group mb-3">
         <span class="form-control form-control-lg text-center">{{cutifiedLink}}</span>
-        <button class="btn btn-info btn-lg" type="button">Copy</button>
+        <button (click)="copyLink()" class="btn btn-info btn-lg" type="button">Copy</button>
       </div>
       <div>
         <a (click)="reset()" href="#">Cutify Another Link</a>
       </div>
     </div>
-  </div>
 </div>
