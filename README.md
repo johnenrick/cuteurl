@@ -15,7 +15,7 @@ For you to run the project, you to set up both frontend and backend applications
 2. **Setup the Backend**
     1. Open cmd, and change directory to _/api_.
     2. Create/Edit .env file. You can duplicate and rename the _.env.example_
-        1. Edit the database configuration
+        1. Edit the database configuration. Also don't forget to start your database server
         2. Add the `INVALID_LINK=<link of the shortened url is invalid>` in .env. The value will be the `<base url of frontend app> + "/invalid"`. E.g. _INVALID_LINK=localhost:4200/**invalid**_
     3. Run `composer install`
     4. Run `php artisan migrate`
